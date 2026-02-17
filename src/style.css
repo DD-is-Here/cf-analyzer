@@ -1,0 +1,119 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: 'Outfit', sans-serif;
+  }
+
+  @media (pointer: fine) {
+    body {
+      cursor: none;
+    }
+  }
+}
+
+@layer components {
+  .glass-panel {
+    @apply rounded-3xl border border-slate-200/10 bg-slate-900/45 shadow-panel backdrop-blur-xl;
+  }
+
+  .section-title {
+    @apply text-xl font-semibold text-cyan-100 sm:text-2xl;
+  }
+
+  .input-box {
+    @apply w-full rounded-xl border border-cyan-200/25 bg-slate-950/70 px-4 py-3 text-sm text-slate-100 placeholder:text-slate-500 outline-none transition focus:border-cyan-300 focus:ring-4 focus:ring-cyan-300/20;
+  }
+
+  .cta-btn {
+    @apply rounded-xl bg-gradient-to-r from-cyan-500 via-sky-500 to-indigo-500 px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:brightness-110 focus:outline-none focus:ring-4 focus:ring-cyan-300/30 sm:min-w-32;
+  }
+
+  .chart-wrap {
+    @apply rounded-2xl border border-slate-800/40 bg-white/95 p-3 sm:p-4;
+    min-height: 320px;
+  }
+
+  .chart-wrap canvas {
+    width: 100% !important;
+    height: 280px !important;
+  }
+
+  .topic-card {
+    @apply glass-panel p-4 transition duration-300;
+  }
+
+  .topic-card.active {
+    @apply border-cyan-300/70 shadow-[0_0_0_1px_rgba(103,232,249,0.35),0_24px_50px_rgba(3,9,24,0.5)];
+  }
+
+  .topic-card.dimmed {
+    @apply opacity-70;
+  }
+
+  .topic-title {
+    @apply text-lg font-semibold text-cyan-100;
+  }
+
+  .stat-panel {
+    @apply rounded-2xl border border-cyan-100/15 bg-slate-900/60 p-4;
+  }
+
+  .stat-grid {
+    @apply mt-4 grid gap-3 sm:grid-cols-2 xl:grid-cols-3;
+  }
+
+  .stat-tile {
+    @apply rounded-xl border border-cyan-100/10 bg-slate-950/60 p-4;
+  }
+
+  .stat-label {
+    @apply text-xs uppercase tracking-[0.18em] text-slate-400;
+  }
+
+  .stat-value {
+    @apply mt-2 text-2xl font-bold text-amber-300;
+  }
+
+  .playlist-link {
+    @apply rounded-lg border border-cyan-100/10 bg-slate-950/50 px-3 py-2 transition hover:border-cyan-300/60 hover:text-cyan-300;
+  }
+}
+
+.custom-cursor-dot {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 100;
+  width: 10px;
+  height: 10px;
+  border-radius: 9999px;
+  background: #8ceeff;
+  transform: translate(-50%, -50%);
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+.custom-cursor-ring {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 99;
+  width: 38px;
+  height: 38px;
+  border-radius: 9999px;
+  border: 1px solid rgba(140, 238, 255, 0.72);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  transition: border-color 0.2s ease;
+}
+
+.cursor-hover .custom-cursor-ring {
+  border-color: rgba(255, 209, 130, 0.95);
+}
+
+.cursor-active .custom-cursor-ring {
+  border-color: rgba(255, 154, 104, 0.9);
+}

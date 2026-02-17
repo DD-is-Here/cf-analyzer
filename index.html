@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CP Analyzer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <script type="module" src="/src/main.js"></script>
+  </head>
+  <body class="min-h-screen bg-ink text-slate-100 antialiased">
+    <canvas id="fxCanvas" class="pointer-events-none fixed inset-0 -z-20"></canvas>
+    <div class="pointer-events-none fixed inset-0 -z-10 bg-[radial-gradient(circle_at_12%_10%,rgba(88,212,255,0.24),transparent_32%),radial-gradient(circle_at_90%_0%,rgba(255,196,105,0.18),transparent_35%),radial-gradient(circle_at_50%_115%,rgba(77,112,255,0.28),transparent_46%),linear-gradient(120deg,#040a14_0%,#09162a_35%,#122845_100%)]"></div>
+    <div id="cursorDot" class="custom-cursor-dot hidden"></div>
+    <div id="cursorRing" class="custom-cursor-ring hidden"></div>
+
+    <main class="mx-auto w-full max-w-7xl px-4 pb-16 pt-8 sm:px-6 lg:px-8">
+      <section id="hero" class="mb-8 rounded-3xl border border-slate-200/10 bg-slate-900/50 p-6 shadow-panel backdrop-blur-xl sm:p-8">
+        <p class="mb-2 text-xs uppercase tracking-[0.32em] text-cyan-300/85">Codeforces Analytics Lab</p>
+        <h1 class="bg-gradient-to-r from-cyan-300 via-amber-200 to-indigo-300 bg-clip-text text-4xl font-extrabold leading-tight text-transparent sm:text-5xl">
+          Competitive Programming Performance Dashboard
+        </h1>
+        <p class="mt-3 max-w-3xl text-sm text-slate-300 sm:text-base">
+          Analyze profiles, compare two coders side by side, and inspect topic distribution and rating progress with a modern, animated UI.
+        </p>
+      </section>
+
+      <section class="grid gap-4 lg:grid-cols-2" id="controlArea">
+        <div class="glass-panel p-4 sm:p-5">
+          <label class="mb-2 block text-sm font-medium text-cyan-200">Primary Handle</label>
+          <div class="flex flex-col gap-3 sm:flex-row">
+            <input id="handleInput" class="input-box" placeholder="Enter Codeforces username" type="text" />
+            <button id="analyzeBtn" class="cta-btn">Analyze</button>
+          </div>
+        </div>
+
+        <div id="compareControls" class="glass-panel hidden p-4 sm:p-5">
+          <label class="mb-2 block text-sm font-medium text-cyan-200">Comparison Handle</label>
+          <div class="flex flex-col gap-3 sm:flex-row">
+            <input id="compareHandleInput" class="input-box" placeholder="Enter second username" type="text" />
+            <button id="compareBtn" class="cta-btn">Compare</button>
+          </div>
+        </div>
+      </section>
+
+      <p class="mt-3 text-center text-xs text-slate-400 sm:text-sm">Swipe up/down to move between sections. Swipe left/right on topic cards to switch focus.</p>
+
+      <section id="dashboard" class="mt-8 hidden space-y-8">
+        <section id="profileSection" class="glass-panel p-5 sm:p-6">
+          <h2 class="section-title">Profile Statistics</h2>
+          <div id="profileGrid" class="mt-4 grid gap-4 xl:grid-cols-2"></div>
+        </section>
+
+        <section class="glass-panel p-5 sm:p-6">
+          <h2 class="section-title">Difficulty Distribution</h2>
+          <div class="mt-4 chart-wrap"><canvas id="difficultyChart"></canvas></div>
+        </section>
+
+        <section class="space-y-4">
+          <h2 class="section-title px-1">Topic Distribution</h2>
+          <div class="grid gap-4 md:grid-cols-2" id="topicCards">
+            <article class="topic-card" id="mainTopicCard">
+              <h3 id="mainTopicTitle" class="topic-title">Main Profile</h3>
+              <div class="chart-wrap"><canvas id="mainTopicChart"></canvas></div>
+            </article>
+            <article class="topic-card hidden" id="compareTopicCard">
+              <h3 id="compareTopicTitle" class="topic-title">Comparison Profile</h3>
+              <div class="chart-wrap"><canvas id="compareTopicChart"></canvas></div>
+            </article>
+          </div>
+        </section>
+
+        <section class="glass-panel p-5 sm:p-6">
+          <h2 class="section-title">Contest vs Rating</h2>
+          <div class="mt-4 chart-wrap"><canvas id="ratingChart"></canvas></div>
+        </section>
+
+        <section class="glass-panel p-5 sm:p-6">
+          <h2 class="section-title">Learning Playlists</h2>
+          <div class="mt-4 grid gap-2 text-sm text-cyan-100 sm:grid-cols-2">
+            <a class="playlist-link" href="https://youtube.com/playlist?list=PLauivoElc3ggagradg8MfOZreCMmXMmJ-&si=3_79MCe41EfSOh8o" target="_blank" rel="noreferrer">Luv CP Playlist</a>
+            <a class="playlist-link" href="https://youtube.com/playlist?list=PLDzeHZWIZsTryvtXdMr6rPh4IDexB5NIA&si=2VLkqEqqoRvXPoul" target="_blank" rel="noreferrer">Luv Babbar DSA Playlist</a>
+            <a class="playlist-link" href="https://youtube.com/playlist?list=PLu0W_9lII9agpFUAlPFe_VNSlXW5uE0YL&si=Aq_TH6xcQc5WrRMY" target="_blank" rel="noreferrer">C++ by Code With Harry</a>
+            <a class="playlist-link" href="https://youtube.com/playlist?list=PLfqMhTWNBTe137I_EPQd34TsgV6IO55pt&si=xaOhN2VmN7FYf_Ha" target="_blank" rel="noreferrer">C++ by Apna College</a>
+          </div>
+        </section>
+      </section>
+    </main>
+  </body>
+</html>
